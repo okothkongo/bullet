@@ -22,7 +22,11 @@ defmodule Bullet.MixProject do
         "hex.publish": :docs,
         "hex.build": :docs,
         credo: :test
-      }
+      },
+      dialyzer: [
+        plt_local_path: "priv/plts",
+        plt_add_apps: [:mix]
+      ]
     ]
   end
 
@@ -38,7 +42,8 @@ defmodule Bullet.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.29.1", only: :docs, runtime: false},
-      {:credo, "~> 1.6", only: :test, runtime: false}
+      {:credo, "~> 1.6", only: :test, runtime: false},
+      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 
