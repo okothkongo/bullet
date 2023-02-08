@@ -28,32 +28,3 @@ bullet-*.tar
 # Dialyzer PLTs
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
-
-
-    - name: Install dependencies
-       mix deps.get
-    #   if: steps.cache-deps.outputs.cache-hit != 'true'
-    #   run: |
-    #     mix deps.get
-    #     mix deps.compile
-
-    # - name: Check for unused dependencies
-    #   run: mix deps.get && mix deps.unlock --check-unused
-
-    - name: Restore cached PLTs
-      uses: actions/cache@v3
-      id: plt_cache
-      with:
-        key: |
-          ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.erlang }}-plt
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.erlang }}-plt
-        path: |
-          priv/plts
-
-    # Create PLTs if no cached PLTs were found
-    - name: Create PLTs
-      if: steps.plt_cache.outputs.cache-hit != 'true'
-      run:  mix dialyzer --plt
-    - name: Run dialyzer
-      run: mix dialyzer
