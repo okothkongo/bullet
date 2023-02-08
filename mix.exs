@@ -43,7 +43,8 @@ defmodule Bullet.MixProject do
     [
       {:ex_doc, "~> 0.29.1", only: :docs, runtime: false},
       {:credo, "~> 1.6", only: :test, runtime: false},
-      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:gun, "~> 1.3"}
     ]
   end
 
